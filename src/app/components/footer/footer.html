@@ -1,0 +1,72 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <!-- Brand column -->
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <span class="footer__logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2C8 2 5 5 5 9v6l-2 3h18l-2-3V9c0-4-3-7-7-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 18a3 3 0 006 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="footer__logo-text">FLEET CONTROL</span>
+        </div>
+        <p class="footer__desc">
+          Plataforma integral de gestión y monitoreo de flotas con GPS en tiempo real. Centraliza tu operación y toma decisiones basadas en datos.
+        </p>
+      </div>
+
+      <!-- Nav column -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">Navegación</h4>
+        <ul class="footer__links">
+          @for (link of navLinks; track link.anchor) {
+            <li>
+              <button type="button" (click)="scrollTo(link.anchor)">{{ link.label }}</button>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Legal column -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">Legal</h4>
+        <ul class="footer__links">
+          @for (link of legalLinks; track link.label) {
+            <li>
+              <a href="{{ link.anchor }}">{{ link.label }}</a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Contact column -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">Contacto</h4>
+        <ul class="footer__contact">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>ventas@fleetcontrol.com</span>
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>+34 900 000 000</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copyright">
+        &copy; {{ currentYear }} FLEET CONTROL. Todos los derechos reservados.
+      </p>
+      <p class="footer__disclaimer">Prototipo demostrativo. Datos y enlaces ficticios.</p>
+    </div>
+  </div>
+</footer>

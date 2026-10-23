@@ -1,0 +1,190 @@
+<section class="contact" id="contacto">
+  <div class="container">
+    <div class="contact__layout">
+      <!-- Info column -->
+      <div class="contact__info">
+        <span class="contact__eyebrow">Hablemos</span>
+        <h2 class="contact__title">Solicita tu demostración</h2>
+        <p class="contact__subtitle">
+          Completa el formulario y nuestro equipo te contactará en menos de 24 horas para agendar una sesión personalizada.
+        </p>
+        <ul class="contact__points">
+          <li>
+            <span class="contact__point-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>Demostración guiada según tu sector</span>
+          </li>
+          <li>
+            <span class="contact__point-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>Evaluación de tus dispositivos actuales</span>
+          </li>
+          <li>
+            <span class="contact__point-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>Propuesta de plan sin compromiso</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Form column -->
+      <div class="contact__form-wrapper">
+        <form class="contact__form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+          <div class="contact__field">
+            <label class="contact__label" for="fullName">Nombre completo *</label>
+            <input
+              class="contact__input"
+              type="text"
+              id="fullName"
+              formControlName="fullName"
+              placeholder="Juan Pérez"
+              [class.contact__input--error]="isInvalid('fullName')"
+            />
+            @if (isInvalid('fullName')) {
+              <span class="contact__error">Introduce tu nombre (mínimo 3 caracteres).</span>
+            }
+          </div>
+
+          <div class="contact__field">
+            <label class="contact__label" for="company">Empresa *</label>
+            <input
+              class="contact__input"
+              type="text"
+              id="company"
+              formControlName="company"
+              placeholder="Tu empresa S.A."
+              [class.contact__input--error]="isInvalid('company')"
+            />
+            @if (isInvalid('company')) {
+              <span class="contact__error">Introduce el nombre de tu empresa.</span>
+            }
+          </div>
+
+          <div class="contact__row">
+            <div class="contact__field">
+              <label class="contact__label" for="email">Correo empresarial *</label>
+              <input
+                class="contact__input"
+                type="email"
+                id="email"
+                formControlName="email"
+                placeholder="nombre@empresa.com"
+                [class.contact__input--error]="isInvalid('email')"
+              />
+              @if (isInvalid('email')) {
+                <span class="contact__error">Introduce un correo electrónico válido.</span>
+              }
+            </div>
+
+            <div class="contact__field">
+              <label class="contact__label" for="phone">Teléfono *</label>
+              <input
+                class="contact__input"
+                type="tel"
+                id="phone"
+                formControlName="phone"
+                placeholder="+34 600 000 000"
+                [class.contact__input--error]="isInvalid('phone')"
+              />
+              @if (isInvalid('phone')) {
+                <span class="contact__error">Introduce un teléfono válido (7-20 dígitos).</span>
+              }
+            </div>
+          </div>
+
+          <div class="contact__row">
+            <div class="contact__field">
+              <label class="contact__label" for="companyType">Tipo de empresa *</label>
+              <select
+                class="contact__select"
+                id="companyType"
+                formControlName="companyType"
+                [class.contact__input--error]="isInvalid('companyType')"
+              >
+                @for (opt of companyTypes; track opt.value) {
+                  <option [value]="opt.value">{{ opt.label }}</option>
+                }
+              </select>
+              @if (isInvalid('companyType')) {
+                <span class="contact__error">Selecciona una opción.</span>
+              }
+            </div>
+
+            <div class="contact__field">
+              <label class="contact__label" for="vehicleCount">Cantidad de vehículos *</label>
+              <input
+                class="contact__input"
+                type="number"
+                id="vehicleCount"
+                formControlName="vehicleCount"
+                placeholder="25"
+                min="1"
+                max="9999"
+                [class.contact__input--error]="isInvalid('vehicleCount')"
+              />
+              @if (isInvalid('vehicleCount')) {
+                <span class="contact__error">Introduce un número entre 1 y 9999.</span>
+              }
+            </div>
+          </div>
+
+          <div class="contact__field">
+            <label class="contact__label" for="interest">Interés principal *</label>
+            <select
+              class="contact__select"
+              id="interest"
+              formControlName="interest"
+              [class.contact__input--error]="isInvalid('interest')"
+            >
+              @for (opt of interests; track opt.value) {
+                <option [value]="opt.value">{{ opt.label }}</option>
+              }
+            </select>
+            @if (isInvalid('interest')) {
+              <span class="contact__error">Selecciona una opción.</span>
+            }
+          </div>
+
+          <button class="contact__submit" type="submit" [disabled]="isSubmitting()">
+            @if (isSubmitting()) {
+              <span class="contact__spinner"></span>
+              <span>Enviando…</span>
+            } @else {
+              <span>Enviar solicitud</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            }
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success modal -->
+  @if (showSuccess()) {
+    <div class="contact__overlay" (click)="closeModal()">
+      <div class="contact__modal" (click)="$event.stopPropagation()">
+        <div class="contact__modal-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="contact__modal-title">¡Solicitud enviada!</h3>
+        <p class="contact__modal-text">
+          Gracias por tu interés en FLEET CONTROL. Nuestro equipo te contactará en menos de 24 horas para coordinar la demostración.
+        </p>
+        <button class="contact__modal-btn" type="button" (click)="closeModal()">Entendido</button>
+      </div>
+    </div>
+  }
+</section>

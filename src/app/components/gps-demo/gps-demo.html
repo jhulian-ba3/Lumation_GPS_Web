@@ -1,0 +1,308 @@
+<section class="gps-demo" id="como-funciona">
+  <div class="container">
+    <div class="gps-demo__header">
+      <span class="gps-demo__eyebrow">Demostración interactiva</span>
+      <h2 class="gps-demo__title">Ve Fleet Control en acción</h2>
+      <p class="gps-demo__subtitle">
+        Simula el seguimiento de una unidad en tiempo real o mira nuestro video explicativo
+        para conocer todas las funcionalidades de la plataforma.
+      </p>
+    </div>
+
+    <!-- Tab switcher -->
+    <div class="gps-demo__tabs">
+      <button
+        class="gps-demo__tab"
+        [class.gps-demo__tab--active]="activeTab() === 'live'"
+        (click)="setTab('live')"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="3" fill="currentColor"/>
+          <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Simulación en vivo
+      </button>
+      <button
+        class="gps-demo__tab"
+        [class.gps-demo__tab--active]="activeTab() === 'video'"
+        (click)="setTab('video')"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
+        </svg>
+        Video explicativo
+      </button>
+    </div>
+
+    <!-- LIVE TAB -->
+    <div class="gps-demo__panel" [class.gps-demo__panel--hidden]="activeTab() !== 'live'">
+      <div class="gps-demo__layout">
+
+        <!-- Side A: Map -->
+        <div class="gps-demo__map-side">
+          <div class="gps-demo__map-card">
+            <div class="gps-demo__map-header">
+              <span class="gps-demo__map-title">Ruta simulada — DEMO-01</span>
+              <span class="gps-demo__map-status" [class.gps-demo__map-status--live]="isRunning()" [class.gps-demo__map-status--paused]="isPaused()">
+                <span class="gps-demo__map-status-dot"></span>
+                {{ isRunning() ? 'EN VIVO' : isPaused() ? 'PAUSADO' : 'LISTO' }}
+              </span>
+            </div>
+
+            <div class="gps-demo__map-body">
+              <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" class="gps-demo__svg-map" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern id="demoGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e8eaf0" stroke-width="0.3"/>
+                  </pattern>
+                  <linearGradient id="demoRouteGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#D71920;stop-opacity:0.5"/>
+                    <stop offset="100%" style="stop-color:#D71920;stop-opacity:1"/>
+                  </linearGradient>
+                  <filter id="demoGlow">
+                    <feGaussianBlur stdDeviation="0.6" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+
+                <rect width="100" height="100" fill="#f8f9fc" rx="8"/>
+                <rect width="100" height="100" fill="url(#demoGrid)" rx="8"/>
+
+                <!-- Decorative roads -->
+                <path d="M 0 50 Q 25 48 50 45 T 100 38" stroke="#d0d5e0" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M 0 85 Q 30 80 60 75 T 100 70" stroke="#d0d5e0" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M 35 0 Q 38 30 40 55 T 42 100" stroke="#d0d5e0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                <path d="M 75 0 Q 78 25 80 50 T 82 100" stroke="#d0d5e0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+                <!-- City blocks -->
+                <rect x="20" y="35" width="12" height="8" rx="1" fill="#e9ecf3" opacity="0.6"/>
+                <rect x="55" y="25" width="15" height="10" rx="1" fill="#e9ecf3" opacity="0.6"/>
+                <rect x="40" y="60" width="14" height="9" rx="1" fill="#e9ecf3" opacity="0.6"/>
+                <rect x="65" y="55" width="10" height="12" rx="1" fill="#e9ecf3" opacity="0.6"/>
+                <rect x="15" y="15" width="12" height="7" rx="1" fill="#e9ecf3" opacity="0.6"/>
+
+                <!-- Route background (gray dashed) -->
+                <path [attr.d]="routePathD" stroke="#e2e4ea" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-dasharray="2,1.5"/>
+
+                <!-- Completed route (red) -->
+                <path
+                  [attr.d]="routePathD"
+                  stroke="url(#demoRouteGrad)"
+                  stroke-width="2"
+                  fill="none"
+                  stroke-linecap="round"
+                  filter="url(#demoGlow)"
+                  pathLength="100"
+                  [attr.stroke-dasharray]="completedDashArray()"
+                  [attr.stroke-dashoffset]="completedDashOffset()"
+                  style="transition: stroke-dashoffset 0.1s linear;"
+                />
+
+                <!-- Start point -->
+                <circle [attr.cx]="routePoints[0].x" [attr.cy]="routePoints[0].y" r="2.2" fill="#D71920"/>
+                <circle [attr.cx]="routePoints[0].x" [attr.cy]="routePoints[0].y" r="3.5" fill="#D71920" opacity="0.2"/>
+                <text [attr.x]="routePoints[0].x" [attr.y]="routePoints[0].y + 8" text-anchor="middle" font-size="2.5" fill="#667085" font-family="system-ui">Inicio</text>
+
+                <!-- End point -->
+                <circle [attr.cx]="routePoints[routePoints.length-1].x" [attr.cy]="routePoints[routePoints.length-1].y" r="2.2" fill="#171A21"/>
+                <text [attr.x]="routePoints[routePoints.length-1].x" [attr.y]="routePoints[routePoints.length-1].y - 4" text-anchor="middle" font-size="2.5" fill="#667085" font-family="system-ui">Destino</text>
+
+                <!-- Intermediate waypoints -->
+                @for (pt of routePoints; track pt.label; let i = $index) {
+                  @if (i > 0 && i < routePoints.length - 1) {
+                    <circle [attr.cx]="pt.x" [attr.cy]="pt.y" r="1" fill="#bbb"/>
+                  }
+                }
+
+                <!-- Vehicle marker -->
+                <g [attr.transform]="vehicleTransform()" style="transition: transform 0.1s linear;">
+                  <circle r="2.8" fill="#D71920" filter="url(#demoGlow)"/>
+                  <circle r="4.5" fill="#D71920" opacity="0.15">
+                    <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.25;0;0.25" dur="2s" repeatCount="indefinite"/>
+                  </circle>
+                  <path d="M -1.5 -1 L 1.5 0 L -1.5 1 Z" fill="white"/>
+                </g>
+
+                <!-- Tooltip near vehicle -->
+                @if (isRunning() || isPaused()) {
+                  <g [attr.transform]="'translate(' + currentX() + ',' + currentY() + ')'">
+                    <rect x="-12" y="-10" width="24" height="6" rx="1.5" fill="#171A21" opacity="0.9"/>
+                    <text x="0" y="-5.5" text-anchor="middle" font-size="2.2" fill="white" font-family="system-ui">DEMO-01</text>
+                  </g>
+                }
+              </svg>
+
+              <!-- Progress bar overlay -->
+              <div class="gps-demo__progress-overlay">
+                <div class="gps-demo__progress-bar">
+                  <div class="gps-demo__progress-fill" [style.width.%]="progressPercent()"></div>
+                </div>
+                <span class="gps-demo__progress-label">{{ progressPercent() }}%</span>
+              </div>
+            </div>
+
+            <!-- Side C: Controls -->
+            <div class="gps-demo__controls">
+              <button
+                class="gps-demo__ctrl gps-demo__ctrl--play"
+                [disabled]="isRunning()"
+                (click)="onPlay()"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
+                </svg>
+                {{ isComplete() ? 'Reiniciar recorrido' : 'Iniciar recorrido' }}
+              </button>
+              <button
+                class="gps-demo__ctrl gps-demo__ctrl--pause"
+                [disabled]="!isRunning()"
+                (click)="onPause()"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/>
+                  <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/>
+                </svg>
+                Pausar
+              </button>
+              <button
+                class="gps-demo__ctrl gps-demo__ctrl--reset"
+                [disabled]="isIdle() && progressPercent() === 0"
+                (click)="onReset()"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M3 12a9 9 0 1 0 3-6.7M3 4v4h4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Reiniciar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side B: Data Card -->
+        <div class="gps-demo__data-side">
+          <div class="gps-demo__data-card">
+            <div class="gps-demo__data-header">
+              <div class="gps-demo__data-unit">
+                <span class="gps-demo__data-unit-badge">DEMO-01</span>
+                <span class="gps-demo__data-unit-live" [class.active]="isRunning()">
+                  <span class="gps-demo__data-live-dot"></span>
+                  {{ isRunning() ? 'Transmitiendo' : isPaused() ? 'En pausa' : 'En espera' }}
+                </span>
+              </div>
+              <div class="gps-demo__data-vehicle-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11M5 11h14M5 11v6a1 1 0 001 1h1a1 1 0 001-1v-1h8v1a1 1 0 001 1h1a1 1 0 001-1v-6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="8" cy="14" r="1" fill="currentColor"/>
+                  <circle cx="16" cy="14" r="1" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="gps-demo__data-driver">
+              <div class="gps-demo__data-avatar">JM</div>
+              <div>
+                <span class="gps-demo__data-label">Conductor</span>
+                <span class="gps-demo__data-value">Juan Martínez</span>
+              </div>
+              <span class="gps-demo__data-status-badge">Conductor de prueba</span>
+            </div>
+
+            <div class="gps-demo__data-divider"></div>
+
+            <div class="gps-demo__data-grid">
+              <div class="gps-demo__data-item">
+                <span class="gps-demo__data-label">Estado</span>
+                <span class="gps-demo__data-value gps-demo__data-value--status" [class.running]="isRunning()" [class.paused]="isPaused()">
+                  {{ isRunning() ? 'En recorrido' : isPaused() ? 'Pausado' : 'Detenido' }}
+                </span>
+              </div>
+              <div class="gps-demo__data-item">
+                <span class="gps-demo__data-label">Velocidad</span>
+                <span class="gps-demo__data-value">{{ snapshot().speedKmh }} <small>km/h</small></span>
+              </div>
+              <div class="gps-demo__data-item">
+                <span class="gps-demo__data-label">Tiempo transcurrido</span>
+                <span class="gps-demo__data-value gps-demo__data-value--mono">{{ formattedTime() }}</span>
+              </div>
+              <div class="gps-demo__data-item">
+                <span class="gps-demo__data-label">Distancia</span>
+                <span class="gps-demo__data-value">{{ snapshot().distanceKm }} <small>km</small></span>
+              </div>
+              <div class="gps-demo__data-item">
+                <span class="gps-demo__data-label">Dirección</span>
+                <span class="gps-demo__data-value">{{ snapshot().heading }}° <small>{{ headingLabel() }}</small></span>
+              </div>
+              <div class="gps-demo__data-item">
+                <span class="gps-demo__data-label">Ubicación</span>
+                <span class="gps-demo__data-value gps-demo__data-value--mono gps-demo__data-value--small">
+                  {{ snapshot().currentPoint.lat.toFixed(4) }}, {{ snapshot().currentPoint.lng.toFixed(4) }}
+                </span>
+              </div>
+            </div>
+
+            <div class="gps-demo__data-divider"></div>
+
+            <div class="gps-demo__data-route">
+              <span class="gps-demo__data-label">Punto más cercano</span>
+              <span class="gps-demo__data-route-point">{{ snapshot().currentPoint.label }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VIDEO TAB -->
+    <div class="gps-demo__panel" [class.gps-demo__panel--hidden]="activeTab() !== 'video'">
+      <div class="gps-demo__video-card">
+        <div class="gps-demo__video-thumbnail" (click)="playVideo()">
+          <div class="gps-demo__video-overlay">
+            <div class="gps-demo__video-play-btn">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <path d="M8 5v14l11-7L8 5z" fill="white"/>
+              </svg>
+            </div>
+          </div>
+          <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" class="gps-demo__video-bg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="vidBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#171A21"/>
+                <stop offset="100%" style="stop-color:#2a0608"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="220" fill="url(#vidBg)"/>
+            <pattern id="vidGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(215,25,32,0.08)" stroke-width="1"/>
+            </pattern>
+            <rect width="400" height="220" fill="url(#vidGrid)"/>
+            <path d="M 30 170 C 80 140 120 120 170 100 S 280 70 370 50" stroke="#D71920" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+            <circle cx="30" cy="170" r="5" fill="#D71920" opacity="0.8"/>
+            <circle cx="370" cy="50" r="5" fill="#D71920"/>
+            <text x="200" y="115" text-anchor="middle" font-size="14" fill="rgba(255,255,255,0.15)" font-family="system-ui" font-weight="700">FLEET CONTROL</text>
+          </svg>
+        </div>
+        <div class="gps-demo__video-info">
+          <h3 class="gps-demo__video-title">Demostración completa de la plataforma</h3>
+          <p class="gps-demo__video-desc">
+            Este video muestra cómo Fleet Control gestiona flotas reales: desde el seguimiento en vivo
+            hasta la generación de reportes, alertas de mantenimiento y análisis de eficiencia.
+            Descubre en menos de 3 minutos todas las capacidades del sistema.
+          </p>
+          <div class="gps-demo__video-meta">
+            <span class="gps-demo__video-tag">Duración: 2:45</span>
+            <span class="gps-demo__video-tag">Español</span>
+            <span class="gps-demo__video-tag">HD 1080p</span>
+          </div>
+          <button class="btn-primary" (click)="playVideo()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
+            </svg>
+            Ver demostración completa
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

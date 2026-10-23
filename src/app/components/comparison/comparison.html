@@ -1,0 +1,70 @@
+<section class="comparison" id="comparativa">
+  <div class="container">
+    <div class="comparison__header">
+      <span class="comparison__eyebrow">Comparativa</span>
+      <h2 class="comparison__title">Métodos tradicionales vs. FLEET CONTROL</h2>
+      <p class="comparison__subtitle">
+        Descubre por qué las empresas cambian la gestión manual por una plataforma centralizada.
+      </p>
+    </div>
+
+    <!-- Desktop table -->
+    <div class="comparison__table-wrapper">
+      <table class="comparison__table">
+        <thead>
+          <tr>
+            <th class="comparison__th comparison__th--feature">Aspecto</th>
+            <th class="comparison__th comparison__th--traditional">Métodos tradicionales</th>
+            <th class="comparison__th comparison__th--fleet">
+              <span class="comparison__th-badge">FLEET CONTROL</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of rows; track row.feature) {
+            <tr class="comparison__tr">
+              <td class="comparison__td comparison__td--feature">{{ row.feature }}</td>
+              <td class="comparison__td comparison__td--traditional">
+                <span class="comparison__icon comparison__icon--x">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span>{{ row.traditional }}</span>
+              </td>
+              <td class="comparison__td comparison__td--fleet">
+                <span class="comparison__icon comparison__icon--check">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>{{ row.fleetControl }}</span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile cards -->
+    <div class="comparison__cards">
+      @for (row of rows; track row.feature) {
+        <div class="comparison__card">
+          <h3 class="comparison__card-title">{{ row.feature }}</h3>
+          <div class="comparison__card-row comparison__card-row--traditional">
+            <span class="comparison__card-label">Tradicional</span>
+            <p>{{ row.traditional }}</p>
+          </div>
+          <div class="comparison__card-row comparison__card-row--fleet">
+            <span class="comparison__card-label">Fleet Control</span>
+            <p>{{ row.fleetControl }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <p class="comparison__footnote">
+      * Las capacidades específicas dependen de los dispositivos instalados y la configuración del plan contratado.
+    </p>
+  </div>
+</section>

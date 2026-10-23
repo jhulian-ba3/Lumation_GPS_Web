@@ -1,0 +1,108 @@
+// Corporate color palette
+:root {
+  --color-red-primary: #D71920;
+  --color-red-dark: #A80F17;
+  --color-white: #FFFFFF;
+  --color-gray-light: #F5F6F8;
+  --color-gray-text: #667085;
+  --color-gray-title: #171A21;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--color-gray-text);
+  background-color: var(--color-white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-gray-title);
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+// Utility classes
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-red-primary);
+  color: var(--color-white);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-red-dark);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--color-gray-title);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  border: 2px solid #E2E4EA;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--color-red-primary);
+    color: var(--color-red-primary);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+}

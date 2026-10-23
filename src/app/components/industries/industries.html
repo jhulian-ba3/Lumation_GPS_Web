@@ -1,0 +1,76 @@
+<section class="industries" id="sectores">
+  <div class="container">
+    <div class="industries__header">
+      <span class="industries__eyebrow">Sectores y casos de uso</span>
+      <h2 class="industries__title">Diseñado para cada tipo de operación</h2>
+      <p class="industries__subtitle">
+        Fleet Control se adapta a las necesidades específicas de tu industria, sea cual sea tu modelo de negocio.
+      </p>
+    </div>
+
+    <div class="industries__grid">
+      @for (industry of industries; track industry.title) {
+        <article class="industry-card">
+          <div class="industry-card__top">
+            <div class="industry-card__icon">
+              @switch (industry.icon) {
+                @case ('delivery') {
+                  <svg viewBox="0 0 24 24" width="28" height="28">
+                    <rect x="1" y="7" width="13" height="10" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M14 10h4l3 3v4h-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="6" cy="19" r="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <circle cx="17" cy="19" r="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                  </svg>
+                }
+                @case ('passengers') {
+                  <svg viewBox="0 0 24 24" width="28" height="28">
+                    <rect x="4" y="3" width="16" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="8" cy="13.5" r="1" fill="currentColor"/>
+                    <circle cx="16" cy="13.5" r="1" fill="currentColor"/>
+                    <path d="M7 20h10M9 17v3M15 17v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                }
+                @case ('logistics') {
+                  <svg viewBox="0 0 24 24" width="28" height="28">
+                    <path d="M3 7h11v10H3z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                    <path d="M14 10h4l3 3v4h-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="7" cy="19" r="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <circle cx="17" cy="19" r="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                  </svg>
+                }
+                @case ('courier') {
+                  <svg viewBox="0 0 24 24" width="28" height="28">
+                    <path d="M3 7l9-4 9 4-9 4-9-4z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                    <path d="M3 7v10l9 4 9-4V7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="12" y1="11" x2="12" y2="21" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                }
+                @case ('corporate') {
+                  <svg viewBox="0 0 24 24" width="28" height="28">
+                    <rect x="4" y="6" width="16" height="14" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M9 6V3h6v3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+                  </svg>
+                }
+              }
+            </div>
+            <h3 class="industry-card__title">{{ industry.title }}</h3>
+          </div>
+          <p class="industry-card__desc">{{ industry.description }}</p>
+          <ul class="industry-card__examples">
+            @for (example of industry.examples; track example) {
+              <li class="industry-card__example">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {{ example }}
+              </li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  </div>
+</section>
