@@ -22,20 +22,15 @@
   &__logo {
     display: flex;
     align-items: center;
-    gap: 10px;
     flex-shrink: 0;
     text-decoration: none;
   }
 
-  &__logo-text {
-    font-size: 17px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    color: var(--color-gray-title);
-  }
-
-  &__logo-accent {
-    color: var(--color-red-primary);
+  &__logo-image {
+    width: 132px;
+    height: auto;
+    max-height: 54px;
+    object-fit: contain;
   }
 
   &__nav {
@@ -77,6 +72,12 @@
 
     @media (max-width: 900px) {
       display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    &__logo-image {
+      width: 112px;
     }
   }
 
