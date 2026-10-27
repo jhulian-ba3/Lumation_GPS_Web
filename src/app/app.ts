@@ -35,5 +35,5 @@ import { FooterComponent } from './components/footer/footer';
   styleUrl: './app.scss',
 })
 export class App {
-  title = 'fleet-control';
+  title = 'routelq';
 }
