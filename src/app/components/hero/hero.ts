@@ -44,4 +44,18 @@ export class HeroComponent {
     { x: 22, y: 58, id: 'FC-014', status: 'idle' },
     { x: 80, y: 20, id: 'FC-033', status: 'active' },
   ];
+
+  scrollToContact(): void {
+    const el = document.querySelector('#contacto');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  scrollToFeatures(): void {
+    const el = document.querySelector('#funcionalidades');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }

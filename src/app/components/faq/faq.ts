@@ -18,14 +18,14 @@ export class FaqComponent {
 
   items: FaqItem[] = [
     {
-      question: '¿Cuánto tiempo toma implementar ROUTELQ en mi flota?',
+      question: '¿Cuánto tiempo toma implementar RouteIQ en mi flota?',
       answer:
         'La implementación típica toma entre 2 y 5 días hábiles, dependiendo del número de vehículos y los dispositivos instalados. Nuestro equipo acompaña el proceso de configuración inicial y capacitación del personal.',
     },
     {
       question: '¿Qué dispositivos GPS son compatibles con la plataforma?',
       answer:
-        'ROUTELQ es compatible con la mayoría de rastreadores GPS del mercado que soporten protocolos estándar. Verificamos la compatibilidad de tus dispositivos actuales antes de la implementación.',
+        'RouteIQ es compatible con la mayoría de rastreadores GPS del mercado que soporten protocolos estándar. Verificamos la compatibilidad de tus dispositivos actuales antes de la implementación.',
     },
     {
       question: '¿Puedo acceder a la plataforma desde mi teléfono móvil?',
@@ -53,7 +53,7 @@ export class FaqComponent {
         'Sí, incluimos sesiones de capacitación inicial para administradores y operadores. También disponemos de documentación, tutoriales en vídeo y soporte técnico durante todo el periodo de contrato.',
     },
     {
-      question: '¿Es posible integrar ROUTELQ con otros sistemas?',
+      question: '¿Es posible integrar RouteIQ con otros sistemas?',
       answer:
         'Contamos con una API REST que permite integrar la plataforma con sistemas ERP, CRM y herramientas de gestión existentes. Evaluamos cada caso particular para asegurar la compatibilidad.',
     },

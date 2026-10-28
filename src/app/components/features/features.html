@@ -1,10 +1,11 @@
 <section class="features" id="funcionalidades">
   <div class="container">
     <div class="features__header">
-      <span class="features__eyebrow">Funcionalidades principales</span>
+      <span class="features__eyebrow">Características destacadas</span>
       <h2 class="features__title">Una plataforma, todas las herramientas</h2>
       <p class="features__subtitle">
-        Gestiona cada aspecto de tu flota con módulos integrados diseñados para operadores profesionales.
+        RouteIQ integra el rastreo GPS, el video wall de cámaras y la gestión de vehículos y conductores
+        con alertas automatizadas para que controles cada aspecto de tu flota.
       </p>
     </div>
 
@@ -17,6 +18,14 @@
                 <svg viewBox="0 0 24 24" width="30" height="30">
                   <path d="M12 2C8.1 2 5 5.1 5 9c0 5.3 7 13 7 13s7-7.7 7-13c0-3.9-3.1-7-7-7z" stroke="currentColor" stroke-width="2" fill="none"/>
                   <circle cx="12" cy="9" r="2.5" fill="currentColor"/>
+                </svg>
+              }
+              @case ('videowall') {
+                <svg viewBox="0 0 24 24" width="30" height="30">
+                  <rect x="3" y="4" width="8" height="7" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <rect x="13" y="4" width="8" height="7" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <rect x="3" y="13" width="8" height="7" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+                  <rect x="13" y="13" width="8" height="7" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
                 </svg>
               }
               @case ('vehicles') {
@@ -32,18 +41,10 @@
                   <path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
                 </svg>
               }
-              @case ('cameras') {
+              @case ('alerts') {
                 <svg viewBox="0 0 24 24" width="30" height="30">
-                  <rect x="3" y="6" width="14" height="12" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
-                  <path d="M17 10l4-2v8l-4-2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                  <circle cx="10" cy="12" r="2" fill="currentColor" opacity="0.3"/>
-                </svg>
-              }
-              @case ('devices') {
-                <svg viewBox="0 0 24 24" width="30" height="30">
-                  <rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
-                  <line x1="11" y1="18" x2="13" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.3"/>
+                  <path d="M12 3C8 3 5 6 5 10v4l-2 3h18l-2-3v-4c0-4-3-7-7-7z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                  <path d="M10 21a2 2 0 004 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
               }
               @case ('adapt') {

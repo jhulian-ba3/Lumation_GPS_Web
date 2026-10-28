@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-type BenefitIcon = 'route' | 'vehicle' | 'driver' | 'adapt';
+type BenefitIcon = 'monitoring' | 'routes' | 'cameras';
 
 interface Benefit {
   icon: BenefitIcon;
@@ -19,24 +19,22 @@ interface Benefit {
 export class BenefitsComponent {
   benefits: Benefit[] = [
     {
-      icon: 'route',
+      icon: 'monitoring',
+      title: 'Monitoreo en tiempo real',
+      description:
+        'Visualiza la ubicación, velocidad y estado de cada vehículo de tu flota desde un panel centralizado, con actualización continua y datos precisos.',
+    },
+    {
+      icon: 'routes',
       title: 'Seguimiento de rutas',
-      description: 'Visualiza el recorrido de cada vehículo en tiempo real y optimiza trayectos al instante.',
+      description:
+        'Reproduce el recorrido de cada unidad, compara rutas planificadas con las reales y optimiza trayectos para reducir tiempos y costes.',
     },
     {
-      icon: 'vehicle',
-      title: 'Gestión centralizada de vehículos',
-      description: 'Controla todo tu parque móvil desde un único panel con datos consolidados y alertas.',
-    },
-    {
-      icon: 'driver',
-      title: 'Organización de conductores y dispositivos',
-      description: 'Asigna conductores, gestiona dispositivos GPS y mantén todo sincronizado sin fricción.',
-    },
-    {
-      icon: 'adapt',
-      title: 'Adaptabilidad a diferentes operaciones',
-      description: 'Configura la plataforma según las necesidades específicas de tu industria y flota.',
+      icon: 'cameras',
+      title: 'Cámaras y video wall',
+      description:
+        'Integra cámaras ADAS y DMS, visualiza las transmisiones en vivo desde un video wall y almacena los eventos relevantes para su revisión.',
     },
   ];
 }

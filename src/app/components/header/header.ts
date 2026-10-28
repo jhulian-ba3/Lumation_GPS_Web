@@ -13,9 +13,9 @@ export class HeaderComponent {
   isMobileMenuOpen = signal(false);
 
   navLinks = [
+    { label: '¿Qué es?', anchor: '#que-es' },
     { label: 'Funcionalidades', anchor: '#funcionalidades' },
-    { label: 'Cómo funciona', anchor: '#como-funciona' },
-    { label: 'Sectores', anchor: '#sectores' },
+    { label: 'Demostración', anchor: '#demostracion' },
     { label: 'Ventajas', anchor: '#ventajas' },
     { label: 'FAQ', anchor: '#faq' },
     { label: 'Contacto', anchor: '#contacto' },

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-type FeatureIcon = 'gps' | 'vehicles' | 'drivers' | 'cameras' | 'devices' | 'adapt';
+type FeatureIcon = 'gps' | 'videowall' | 'vehicles' | 'drivers' | 'alerts' | 'adapt';
 
 interface Feature {
   icon: FeatureIcon;
@@ -20,33 +20,39 @@ export class FeaturesComponent {
   features: Feature[] = [
     {
       icon: 'gps',
-      title: 'Monitoreo GPS',
-      description: 'Seguimiento satelital en tiempo real con actualización cada 5 segundos y precisión de ubicación inferior a 10 metros.',
+      title: 'Rastreo GPS en tiempo real',
+      description:
+        'Seguimiento satelital con actualización cada 5 segundos y precisión inferior a 10 metros. Visualiza la ubicación de cada vehículo en el mapa.',
+    },
+    {
+      icon: 'videowall',
+      title: 'Video Wall de cámaras',
+      description:
+        'Centraliza las transmisiones de tus cámaras ADAS y DMS en un video wall único. Visualiza en vivo, almacena eventos y descarga grabaciones.',
     },
     {
       icon: 'vehicles',
       title: 'Gestión de Vehículos',
-      description: 'Registro completo de cada unidad: matrícula, seguro, ITV, mantenimiento preventivo y historial de incidencias.',
+      description:
+        'Registro completo de cada unidad: matrícula, seguro, ITV, mantenimiento preventivo e historial de incidencias en un solo lugar.',
     },
     {
       icon: 'drivers',
-      title: 'Administración de Conductores',
-      description: 'Perfiles con licencia, horarios, descansos y métricas de conducción. Detecta conductas de riesgo automáticamente.',
+      title: 'Gestión de Conductores',
+      description:
+        'Perfiles con licencia, horarios y descansos. Asigna conductores a vehículos y detecta automáticamente conductas de riesgo al volante.',
     },
     {
-      icon: 'cameras',
-      title: 'Integración de Cámaras',
-      description: 'Conecta cámaras ADAS y DMS para visualización en vivo, almacenamiento de eventos y descarga de grabaciones.',
-    },
-    {
-      icon: 'devices',
-      title: 'Gestión de Dispositivos',
-      description: 'Administra todos los rastreadores GPS y sensores instalados desde un único panel con diagnósticos remotos.',
+      icon: 'alerts',
+      title: 'Alertas automatizadas',
+      description:
+        'Recibe notificaciones instantáneas de excesos de velocidad, desvíos de ruta, entrada/salida de geocercas y mantenimiento preventivo.',
     },
     {
       icon: 'adapt',
-      title: 'Adaptabilidad Empresarial',
-      description: 'Configura alertas, reportes y paneles según los procesos operativos específicos de tu empresa.',
+      title: 'Adaptabilidad empresarial',
+      description:
+        'Configura alertas, reportes y paneles según los procesos operativos específicos de tu empresa y los requisitos de tu sector.',
     },
   ];
 }

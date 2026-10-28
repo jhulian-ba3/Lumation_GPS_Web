@@ -15,33 +15,13 @@ export class ContactComponent {
 
   form!: FormGroup;
 
-  companyTypes = [
-    { value: '', label: 'Selecciona una opción' },
-    { value: 'delivery', label: 'Delivery / Última milla' },
-    { value: 'logistica', label: 'Logística y distribución' },
-    { value: 'pasajeros', label: 'Transporte de pasajeros' },
-    { value: 'carga', label: 'Transporte de carga' },
-    { value: 'construccion', label: 'Construcción y maquinaria' },
-    { value: 'otro', label: 'Otro' },
-  ];
-
-  interests = [
-    { value: '', label: 'Selecciona una opción' },
-    { value: 'demo', label: 'Demostración de la plataforma' },
-    { value: 'precio', label: 'Información de precios' },
-    { value: 'implementacion', label: 'Asesoría de implementación' },
-    { value: 'integracion', label: 'Integración con sistemas actuales' },
-  ];
-
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3)]],
       company: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern(/^[+0-9\s()-]{7,20}$/)]],
-      companyType: ['', [Validators.required]],
-      vehicleCount: ['', [Validators.required, Validators.min(1), Validators.max(9999)]],
-      interest: ['', [Validators.required]],
+      message: ['', [Validators.required, Validators.minLength(10)]],
     });
   }
 
