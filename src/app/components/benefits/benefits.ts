@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-type BenefitIcon = 'monitoring' | 'routes' | 'cameras';
+type BenefitIcon = 'monitoring' | 'routes' | 'cameras'|'alerts';
 
 interface Benefit {
   icon: BenefitIcon;
@@ -35,6 +35,11 @@ export class BenefitsComponent {
       title: 'Cámaras y video wall',
       description:
         'Integra cámaras ADAS y DMS, visualiza las transmisiones en vivo desde un video wall y almacena los eventos relevantes para su revisión.',
-    },
+    },{
+      icon: 'alerts',
+      title: 'Alertas y gestión',
+      description:
+        'Configura notificaciones automáticas ante excesos de velocidad, desvíos de ruta no autorizados y administra conductores de forma eficiente.',
+    }
   ];
 }
